@@ -44,17 +44,18 @@ export default class Button extends Component {
   }
 
   _renderGroupedChildren() {
-    let { disabled } = this.props;
+    let {disabled, allowFontScaling} = this.props;
     let style = [
       styles.text,
       disabled ? styles.disabledText : null,
       this.props.style,
       disabled ? this.props.styleDisabled : null,
     ];
+    allowFontScaling = typeof allowFontScaling === 'boolean' ? allowFontScaling : false;
 
     let children = coalesceNonElementChildren(this.props.children, (children, index) => {
       return (
-        <Text key={index} style={style}>
+        <Text key={index} style={style} allowFontScaling={allowFontScaling}>
           {children}
         </Text>
       );
